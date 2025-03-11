@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/r3labs/diff/v2"
+	"github.com/nogates/diff/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -904,7 +904,7 @@ func (o *testTypeDiffer) InsertParentDiffer(dfunc func(path []string, a, b refle
 	o.DiffFunc = dfunc
 }
 
-func (o *testTypeDiffer) Match(a, b reflect.Value) bool {
+func (o *testTypeDiffer) Match(path []string, a, b reflect.Value) bool {
 	return diff.AreType(a, b, reflect.TypeOf(testType("")))
 }
 func (o *testTypeDiffer) Diff(cl *diff.Changelog, path []string, a, b reflect.Value) error {
@@ -957,7 +957,7 @@ func (o *recursiveTestStructDiffer) InsertParentDiffer(dfunc func(path []string,
 	o.DiffFunc = dfunc
 }
 
-func (o *recursiveTestStructDiffer) Match(a, b reflect.Value) bool {
+func (o *recursiveTestStructDiffer) Match(path []string, a, b reflect.Value) bool {
 	return diff.AreType(a, b, reflect.TypeOf(RecursiveTestStruct{}))
 }
 
