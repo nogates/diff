@@ -102,7 +102,7 @@ type Change struct {
 
 // ValueDiffer is an interface for custom differs
 type ValueDiffer interface {
-	Match(a, b reflect.Value) bool
+	Match(path []string, a, b reflect.Value) bool
 	Diff(dt DiffType, df DiffFunc, cl *Changelog, path []string, a, b reflect.Value, parent interface{}) error
 	InsertParentDiffer(dfunc func(path []string, a, b reflect.Value, p interface{}) error)
 }
@@ -245,7 +245,7 @@ func (d *Differ) diff(path []string, a, b reflect.Value, parent interface{}) err
 	// first go through custom diff functions
 	if len(d.customValueDiffers) > 0 {
 		for _, vd := range d.customValueDiffers {
-			if vd.Match(a, b) {
+			if vd.Match(path, a, b) {
 				err := vd.Diff(diffType, diffFunc, &d.cl, path, a, b, parent)
 				if err != nil {
 					return err

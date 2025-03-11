@@ -905,7 +905,7 @@ func (o *testTypeDiffer) InsertParentDiffer(dfunc func(path []string, a, b refle
 	o.DiffFunc = dfunc
 }
 
-func (o *testTypeDiffer) Match(a, b reflect.Value) bool {
+func (o *testTypeDiffer) Match(path []string, a, b reflect.Value) bool {
 	return diff.AreType(a, b, reflect.TypeOf(testType("")))
 }
 func (o *testTypeDiffer) Diff(dt diff.DiffType, df diff.DiffFunc, cl *diff.Changelog, path []string, a, b reflect.Value, parent interface{}) error {
@@ -953,7 +953,7 @@ func (o *testStringInterceptorDiffer) InsertParentDiffer(dfunc func(path []strin
 	o.DiffFunc = dfunc
 }
 
-func (o *testStringInterceptorDiffer) Match(a, b reflect.Value) bool {
+func (o *testStringInterceptorDiffer) Match(path []string, a, b reflect.Value) bool {
 	return diff.AreType(a, b, reflect.TypeOf(testType("")))
 }
 func (o *testStringInterceptorDiffer) Diff(dt diff.DiffType, df diff.DiffFunc, cl *diff.Changelog, path []string, a, b reflect.Value, parent interface{}) error {
@@ -1006,7 +1006,7 @@ func (o *recursiveTestStructDiffer) InsertParentDiffer(dfunc func(path []string,
 	o.DiffFunc = dfunc
 }
 
-func (o *recursiveTestStructDiffer) Match(a, b reflect.Value) bool {
+func (o *recursiveTestStructDiffer) Match(path []string, a, b reflect.Value) bool {
 	return diff.AreType(a, b, reflect.TypeOf(RecursiveTestStruct{}))
 }
 
